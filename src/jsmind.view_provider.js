@@ -362,18 +362,19 @@ export class ViewProvider {
         return this.set_zoom(this.zoom_current - this.opts.zoom.step, e);
     }
     set_zoom(zoom, e) {
+        console.log('setting zoom to:', zoom);
         if (zoom < this.opts.zoom.min || zoom > this.opts.zoom.max) {
             return false;
         }
         let e_panel_rect = this.e_panel.getBoundingClientRect();
-        if (
+/*        if (
             zoom < 1 &&
             zoom < this.zoom_current &&
             this.size.w * zoom < e_panel_rect.width &&
             this.size.h * zoom < e_panel_rect.height
         ) {
             return false;
-        }
+        }*/
         let zoom_center = !!e
             ? { x: e.x - e_panel_rect.x, y: e.y - e_panel_rect.y }
             : { x: e_panel_rect.width / 2, y: e_panel_rect.height / 2 };
