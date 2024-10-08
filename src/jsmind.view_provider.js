@@ -145,6 +145,7 @@ export class ViewProvider {
         this._initialized = true;
     }
     expand_size() {
+//        debugger;
         var min_size = this.layout.get_min_size();
         var min_width = min_size.w + this.opts.hmargin * 2;
         var min_height = min_size.h + this.opts.vmargin * 2;
@@ -156,6 +157,7 @@ export class ViewProvider {
         if (client_h < min_height) {
             client_h = min_height;
         }
+        // Ensure the size does not exceed the client window's dimensions
         this.size.w = client_w;
         this.size.h = client_h;
     }
@@ -362,7 +364,7 @@ export class ViewProvider {
         return this.set_zoom(this.zoom_current - this.opts.zoom.step, e);
     }
     set_zoom(zoom, e) {
-        console.log('setting zoom to:', zoom);
+        //console.log('setting zoom to:', zoom);
         if (zoom < this.opts.zoom.min || zoom > this.opts.zoom.max) {
             return false;
         }
