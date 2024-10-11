@@ -33,6 +33,7 @@ const default_options = {
             step: 0.1,
         },
         custom_node_render: null,
+        show_expander: false,
         expander_style: 'char', // [char | number]
     },
     layout: {

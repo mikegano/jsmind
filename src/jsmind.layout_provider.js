@@ -13,6 +13,7 @@ export class LayoutProvider {
         this.jm = jm;
         this.isside = this.opts.mode == 'side';
         this.bounds = null;
+        this.show_expander = false;
 
         this.cache_valid = false;
     }
@@ -156,7 +157,7 @@ export class LayoutProvider {
             layout_data.offset_x =
                 this.opts.hspace * layout_data.direction +
                 (pd.view.width * (pd.layout.direction + layout_data.direction)) / 2;
-            if (!node.parent.isroot) {
+            if (!node.parent.isroot && this.show_expander) {
                 layout_data.offset_x += this.opts.pspace * layout_data.direction;
             }
 
@@ -266,14 +267,16 @@ export class LayoutProvider {
             } else {
                 var view_data = node._data.view;
                 var offset_p = this.get_node_offset(node);
+                var pspace = this.show_expander ? this.opts.pspace : 0;
                 pout_cache.x =
-                    offset_p.x + (view_data.width + this.opts.pspace) * node._data.layout.direction;
+                    offset_p.x + (view_data.width + pspace) * node._data.layout.direction;
                 pout_cache.y = offset_p.y;
             }
         }
         return pout_cache;
     }
     get_expander_point(node) {
+        if (!this.show_expander) return null; 
         var p = this.get_node_point_out(node);
         var ex_p = {};
         if (node._data.layout.direction == Direction.right) {

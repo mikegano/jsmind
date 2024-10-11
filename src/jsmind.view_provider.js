@@ -34,6 +34,8 @@ export class ViewProvider {
             ? $.w.devicePixelRatio || 1
             : 1;
         this._initialized = false;
+
+        this.show_expander = false;
     }
     init() {
         logger.debug(this.opts);
@@ -145,7 +147,6 @@ export class ViewProvider {
         this._initialized = true;
     }
     expand_size() {
-//        debugger;
         var min_size = this.layout.get_min_size();
         var min_width = min_size.w + this.opts.hmargin * 2;
         var min_height = min_size.h + this.opts.vmargin * 2;
@@ -460,6 +461,8 @@ export class ViewProvider {
         }
     }
     _show_expander(node, view_offset) {
+        if (!this.show_expander) return;
+
         if (node.isroot) {
             return;
         }
