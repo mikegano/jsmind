@@ -76,20 +76,20 @@ jmexpander {
 /* default theme */
 jmnode {
     padding: 10px;
-    background-color: #fff;
-    color: #333;
+    background-color: #99B;
+    color: #334;
     border-radius: 5px;
     box-shadow: 1px 1px 1px #666;
     font: 16px/1.125 Verdana, Arial, Helvetica, sans-serif;
 }
 jmnode:hover {
     box-shadow: 2px 2px 8px #000;
-    background-color: #ebebeb;
-    color: #333;
+    background-color: #BBD;
+    color: #334;
 }
 jmnode.selected {
-    background-color: #11f;
-    color: #fff;
+    background-color: #DDE;
+    color: #334;
     box-shadow: 2px 2px 8px #000;
 }
 jmnode.root {
