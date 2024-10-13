@@ -438,6 +438,7 @@ export default class jsMind {
             }
             var node = this.get_node(node_id);
             if (!!node) {
+                console.log('jm.update_node called for node:', node_id, 'with new topic:', topic);
                 if (node.topic === topic) {
                     logger.info('nothing changed');
                     this.view.update_node(node);

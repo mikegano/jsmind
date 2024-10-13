@@ -47,7 +47,7 @@ jmnodes {
 jmnode {
     position: absolute;
     cursor: default;
-    max-width: 400px;
+    max-width: 300px;
 }
 jmexpander {
     position: absolute;
@@ -405,4 +405,54 @@ jmnodes.theme-asbestos jmnode.root {
 jmnodes.theme-asbestos jmexpander {
 }
 jmnodes.theme-asbestos jmexpander:hover {
+}
+
+/* init theme */
+/* jmnode {
+    padding: 10px;
+    background-color: #99B;
+    color: #334;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px #666;
+    font: 16px/1.125 Verdana, Arial, Helvetica, sans-serif;
+}
+jmnode:hover {
+    box-shadow: 2px 2px 8px #000;
+    background-color: #BBD;
+    color: #334;
+} */
+
+jmnodes.theme-init jmnode {
+    background-color: #4F4F64;
+    color: #4F4F64;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px #666681;
+}
+jmnodes.theme-init jmnode:hover {
+    background-color: #4F4F64;
+    color: #4F4F64;
+    box-shadow: 1px 1px 1px #666681;
+}
+
+jmnodes.theme-init jmnode.selected {
+    background-color: #C8C6E6;
+    color: #334;
+    /* box-shadow: 2px 2px 8px #000; */
+}
+
+.jsmind-editor::placeholder {
+    color: var(--placeholder-color, #65719b);
+    opacity: var(--placeholder-opacity, 0.5);
+}
+
+/* For Internet Explorer */
+.jsmind-editor:-ms-input-placeholder {
+    color: var(--placeholder-color, #65719b);
+    opacity: var(--placeholder-opacity, 0.5);
+}
+
+/* For Microsoft Edge */
+.jsmind-editor::-ms-input-placeholder {
+    color: var(--placeholder-color, #65719b);
+    opacity: var(--placeholder-opacity, 0.5);
 }

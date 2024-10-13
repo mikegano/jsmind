@@ -61,13 +61,16 @@ export class ViewProvider {
 
         var v = this;
         $.on(this.e_editor, 'keydown', function (e) {
+            console.log('jm listener/ keydown');
             var evt = e || event;
             if (evt.keyCode == 13) {
+                console.log('jm listener/ keydown: enter');
                 v.edit_node_end();
                 evt.stopPropagation();
             }
         });
         $.on(this.e_editor, 'blur', function (e) {
+            console.log('listener/ blur');
             v.edit_node_end();
         });
 
@@ -282,6 +285,11 @@ export class ViewProvider {
             this.selected_node = node;
             node._data.view.element.className += ' selected';
             this.clear_selected_node_custom_style(node);
+        
+            // New condition: If we're selecting the root node in init mode, begin editing
+            if (this.jm.options.init_mode && node.isroot) {
+                this.edit_node_begin(node);
+            }
         }
     }
     select_clear() {
@@ -294,19 +302,44 @@ export class ViewProvider {
         return !!this.editing_node;
     }
     edit_node_begin(node) {
+        console.log('edit_node_begin/ node:', node.id, 'with topic:', node.topic);
         if (!node.topic) {
             logger.warn("don't edit image nodes");
             return;
         }
+        console.log('edit_node_begin/ editing_node:', this.editing_node);
+        
+        // New condition: If we're already editing the root node in init mode, just focus the editor
+        if (this.editing_node && this.editing_node.id === node.id && this.jm.options.init_mode && node.isroot) {
+            this.e_editor.focus();
+            return;
+        }
+        
         if (this.editing_node != null) {
+            console.log('edit_node_begin/ calling end');
             this.edit_node_end();
         }
+
         this.editing_node = node;
         var view_data = node._data.view;
         var element = view_data.element;
         var topic = node.topic;
         var ncs = getComputedStyle(element);
-        this.e_editor.value = topic;
+        
+        console.log('edit_node_begin/ styling for init_mode:', this.jm.options.init_mode, 'and node.isroot:', node.isroot);
+
+        // Check if it's the init state and root node
+        if (this.jm.options.init_mode && node.isroot) {
+            this.e_editor.value = "";
+            this.e_editor.placeholder = "Enter a topic";
+            this.e_editor.style.setProperty('--placeholder-color', '#65719b');
+            this.e_editor.style.setProperty('--placeholder-opacity', '1');
+        } else {
+            this.e_editor.value = topic;
+            this.e_editor.placeholder = "";
+            this.e_editor.style.color = ""; // Reset to default color
+        }
+        
         this.e_editor.style.width =
             element.clientWidth -
             parseInt(ncs.getPropertyValue('padding-left')) -
@@ -315,21 +348,70 @@ export class ViewProvider {
         element.innerHTML = '';
         element.appendChild(this.e_editor);
         element.style.zIndex = 5;
+        
+        // Add these styles to make the input box fully transparent
+        this.e_editor.style.backgroundColor = 'transparent';
+        this.e_editor.style.border = 'none';
+        this.e_editor.style.outline = 'none'; // Remove the focus outline
+        this.e_editor.style.boxShadow = 'none'; // Remove any box shadow
+        this.e_editor.style.padding = '0'; // Remove any padding
+        this.e_editor.style.margin = '0'; // Remove any margin
+        this.e_editor.style.font = 'inherit'; // Inherit font properties from the parent
+
+        // If you want to match the exact style of the node text, you might need to add:
+        this.e_editor.style.lineHeight = ncs.lineHeight;
+        this.e_editor.style.textAlign = ncs.textAlign;
+
         this.e_editor.focus();
-        this.e_editor.select();
+
+        // Position cursor at start for init state, select all for normal editing
+        if (this.jm.options.init_mode && node.isroot) {
+            this.e_editor.setSelectionRange(0, 0);
+        } else {
+            this.e_editor.select();
+        }
+
+        this.e_editor.addEventListener('input', function() {
+            if (this.value !== "") {
+                this.style.color = ""; // Reset to default color
+            }
+        });
+
     }
     edit_node_end() {
+
         if (this.editing_node != null) {
             var node = this.editing_node;
             this.editing_node = null;
             var view_data = node._data.view;
             var element = view_data.element;
             var topic = this.e_editor.value;
+            console.log('edit_node_end/ node:', node.id, 'with topic:', topic);
             element.style.zIndex = 'auto';
             element.removeChild(this.e_editor);
-            if (util.text.is_empty(topic) || node.topic === topic) {
+            
+            if (util.text.is_empty(topic)) {
+                console.log('edit_node_end/ Topic is empty:', topic);
+                if (node.isroot && this.jm.options.init_mode) {
+                    console.log('edit_node_end / Root + init mode. will append and exit early');
+                    // Reset to placeholder state for root node if left empty in init mode
+                    this.e_editor.value = "";
+                    this.e_editor.placeholder = "Enter a topic";
+                    this.e_editor.style.setProperty('--placeholder-color', '#65719b');
+                    this.e_editor.style.setProperty('--placeholder-opacity', '1');
+                    element.appendChild(this.e_editor);
+                    this.e_editor.focus();
+                    return; // Exit the function early to keep editing
+                } else {
+                    console.log('edit_node_end / Topic is empty but not root or init mode. Rendering node.');
+                    this.render_node(element, node);
+                }
+            } else if (node.topic === topic) {
+                console.log('edit_node_end/ Same topic', node.topic, '=', topic, ". Rendering_node.");
                 this.render_node(element, node);
             } else {
+                console.log('edit_node_end/ Updating node topic from', node.topic, 'to', topic);
+                this.jm.options.init_mode = false;
                 this.jm.update_node(node.id, topic);
             }
         }
