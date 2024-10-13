@@ -285,8 +285,8 @@ export class ViewProvider {
             this.selected_node = node;
             node._data.view.element.className += ' selected';
             this.clear_selected_node_custom_style(node);
-        
-            // New condition: If we're selecting the root node in init mode, begin editing
+            
+            // If we're selecting the root node in init mode, begin editing
             if (this.jm.options.init_mode && node.isroot) {
                 this.edit_node_begin(node);
             }
@@ -309,12 +309,6 @@ export class ViewProvider {
         }
         console.log('edit_node_begin/ editing_node:', this.editing_node);
         
-        // New condition: If we're already editing the root node in init mode, just focus the editor
-        if (this.editing_node && this.editing_node.id === node.id && this.jm.options.init_mode && node.isroot) {
-            this.e_editor.focus();
-            return;
-        }
-        
         if (this.editing_node != null) {
             console.log('edit_node_begin/ calling end');
             this.edit_node_end();
@@ -328,17 +322,7 @@ export class ViewProvider {
         
         console.log('edit_node_begin/ styling for init_mode:', this.jm.options.init_mode, 'and node.isroot:', node.isroot);
 
-        // Check if it's the init state and root node
-        if (this.jm.options.init_mode && node.isroot) {
-            this.e_editor.value = "";
-            this.e_editor.placeholder = "Enter a topic";
-            this.e_editor.style.setProperty('--placeholder-color', '#65719b');
-            this.e_editor.style.setProperty('--placeholder-opacity', '1');
-        } else {
-            this.e_editor.value = topic;
-            this.e_editor.placeholder = "";
-            this.e_editor.style.color = ""; // Reset to default color
-        }
+        this.e_editor.value = topic;
         
         this.e_editor.style.width =
             element.clientWidth -
@@ -352,31 +336,18 @@ export class ViewProvider {
         // Add these styles to make the input box fully transparent
         this.e_editor.style.backgroundColor = 'transparent';
         this.e_editor.style.border = 'none';
-        this.e_editor.style.outline = 'none'; // Remove the focus outline
-        this.e_editor.style.boxShadow = 'none'; // Remove any box shadow
-        this.e_editor.style.padding = '0'; // Remove any padding
-        this.e_editor.style.margin = '0'; // Remove any margin
-        this.e_editor.style.font = 'inherit'; // Inherit font properties from the parent
-
-        // If you want to match the exact style of the node text, you might need to add:
+        this.e_editor.style.outline = 'none';
+        this.e_editor.style.boxShadow = 'none';
+        this.e_editor.style.padding = '0';
+        this.e_editor.style.margin = '0';
+        this.e_editor.style.font = 'inherit';
         this.e_editor.style.lineHeight = ncs.lineHeight;
         this.e_editor.style.textAlign = ncs.textAlign;
 
         this.e_editor.focus();
 
-        // Position cursor at start for init state, select all for normal editing
-        if (this.jm.options.init_mode && node.isroot) {
-            this.e_editor.setSelectionRange(0, 0);
-        } else {
-            this.e_editor.select();
-        }
-
-        this.e_editor.addEventListener('input', function() {
-            if (this.value !== "") {
-                this.style.color = ""; // Reset to default color
-            }
-        });
-
+        // Select all text, even in init mode
+        this.e_editor.select();
     }
     edit_node_end() {
 
