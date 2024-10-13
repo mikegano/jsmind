@@ -154,8 +154,12 @@ export class LayoutProvider {
 
             layout_data.outer_height = node_outer_height;
             layout_data.offset_y = base_y - node_outer_height / 2;
+
+            // Determine hspace based on whether the parent is the root node
+            var hspace = node.parent.isroot ? -100 : this.opts.hspace;
+
             layout_data.offset_x =
-                this.opts.hspace * layout_data.direction +
+                hspace * layout_data.direction +
                 (pd.view.width * (pd.layout.direction + layout_data.direction)) / 2;
             if (!node.parent.isroot && this.show_expander) {
                 layout_data.offset_x += this.opts.pspace * layout_data.direction;

@@ -36,6 +36,7 @@ const default_options = {
         show_expander: false,
         expander_style: 'char', // [char | number]
     },
+
     layout: {
         hspace: 30,
         vspace: 20,
