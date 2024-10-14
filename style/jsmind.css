@@ -13,7 +13,11 @@
     width: 100%;
     height: 100%;
     outline: none;
-} /*box-shadow:0 0 2px #000;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
 .jsmind-inner {
     moz-user-select: -moz-none;
     -moz-user-select: none;
@@ -79,8 +83,10 @@ jmnode {
     background-color: #99B;
     color: #334;
     border-radius: 5px;
-    box-shadow: 1px 1px 1px #666;
+    box-shadow: 1px 1px 1px #AAC;
     font: 16px/1.125 Verdana, Arial, Helvetica, sans-serif;
+    min-width: 200px;
+    text-align: center;
 }
 jmnode:hover {
     box-shadow: 2px 2px 8px #000;

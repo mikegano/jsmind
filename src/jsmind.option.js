@@ -19,8 +19,8 @@ const default_options = {
     view: {
         engine: 'canvas',
         enable_device_pixel_ratio: false,
-        hmargin: 100,
-        vmargin: 50,
+        hmargin: 10,
+        vmargin: 10,
         line_width: 2,
         line_color: '#555',
         line_style: 'curved', // [straight | curved]

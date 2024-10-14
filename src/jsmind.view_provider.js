@@ -418,36 +418,21 @@ export class ViewProvider {
         return this.set_zoom(this.zoom_current - this.opts.zoom.step, e);
     }
     set_zoom(zoom, e) {
-        //console.log('setting zoom to:', zoom);
         if (zoom < this.opts.zoom.min || zoom > this.opts.zoom.max) {
             return false;
         }
-        let e_panel_rect = this.e_panel.getBoundingClientRect();
-/*        if (
-            zoom < 1 &&
-            zoom < this.zoom_current &&
-            this.size.w * zoom < e_panel_rect.width &&
-            this.size.h * zoom < e_panel_rect.height
-        ) {
-            return false;
-        }*/
-        let zoom_center = !!e
-            ? { x: e.x - e_panel_rect.x, y: e.y - e_panel_rect.y }
-            : { x: e_panel_rect.width / 2, y: e_panel_rect.height / 2 };
-        let panel_scroll_x =
-            ((this.e_panel.scrollLeft + zoom_center.x) * zoom) / this.zoom_current - zoom_center.x;
-        let panel_scroll_y =
-            ((this.e_panel.scrollTop + zoom_center.y) * zoom) / this.zoom_current - zoom_center.y;
-
         this.zoom_current = zoom;
         for (var i = 0; i < this.e_panel.children.length; i++) {
             this.e_panel.children[i].style.zoom = zoom;
         }
         this._show();
-        this.e_panel.scrollLeft = panel_scroll_x;
-        this.e_panel.scrollTop = panel_scroll_y;
+    
+        // Center the root node after zooming
+        this.center_node(this.jm.mind.root);
+    
         return true;
     }
+    
     show(keep_center) {
         logger.debug(`view.show: {keep_center: ${keep_center}}`);
         this.expand_size();
