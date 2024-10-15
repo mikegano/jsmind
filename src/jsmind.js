@@ -135,7 +135,7 @@ export default class jsMind {
         var node_id = this.view.get_binded_nodeid(element);
         if (!!node_id) {
             if (this.view.is_node(element)) {
-                this.select_node(node_id);
+                this.select_node(node_id, e);  // Pass the event object
             }
         } else {
             this.select_clear();
@@ -478,22 +478,22 @@ export default class jsMind {
             return;
         }
     }
-    select_node(node) {
+    select_node(node, evt) {
         if (!Node.is_node(node)) {
             var the_node = this.get_node(node);
             if (!the_node) {
                 logger.error('the node[id=' + node + '] can not be found.');
                 return;
             } else {
-                return this.select_node(the_node);
+                return this.select_node(the_node, evt);
             }
         }
         if (!this.layout.is_visible(node)) {
             return;
         }
         this.mind.selected = node;
-        this.view.select_node(node);
-        this.invoke_event_handle(EventType.select, { evt: 'select_node', data: [], node: node.id });
+        // this.invoke_event_handle(EventType.select, { evt: 'select_node', data: [], node: node.id });
+        this.view.select_node(node, evt);  // Pass the event object
     }
     get_selected_node() {
         if (!!this.mind) {

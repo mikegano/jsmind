@@ -37,7 +37,7 @@ export const Direction = {
         }
     },
 };
-export const EventType = { show: 1, resize: 2, edit: 3, select: 4 };
+export const EventType = { show: 1, resize: 2, edit: 3, select: 4, rightclick: 5 };
 export const Key = { meta: 1 << 13, ctrl: 1 << 12, alt: 1 << 11, shift: 1 << 10 };
 export const LogLevel = { debug: 1, info: 2, warn: 3, error: 4, disable: 9 };
 

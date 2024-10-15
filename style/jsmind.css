@@ -135,8 +135,8 @@ jmnodes.theme-init jmnode:hover {
 }
 
 jmnodes.theme-init jmnode.selected {
-    background-color: #C8C6E6;
-    color: #334;
+    /* background-color: #C8C6E6;
+    color: #334; */
     /* box-shadow: 2px 2px 8px #000; */
 }
 

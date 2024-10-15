@@ -275,7 +275,7 @@ export class ViewProvider {
             element.style = origin_style;
         }
     }
-    select_node(node) {
+    select_node(node, evt) {
         if (!!this.selected_node) {
             var element = this.selected_node._data.view.element;
             element.className = element.className.replace(/\s*selected\b/i, '');
@@ -286,6 +286,23 @@ export class ViewProvider {
             node._data.view.element.className += ' selected';
             this.clear_selected_node_custom_style(node);
             
+            // Check if it's a right-click event
+            if (evt && evt.button === 2) {
+                // Trigger the rightclick event
+                this.jm.invoke_event_handle(EventType.rightclick, {
+                    evt: 'select_node',
+                    data: [node.id],
+                    node: node.id
+                });
+            } else {
+                // Trigger the regular select event
+                this.jm.invoke_event_handle(EventType.select, {
+                    evt: 'select_node',
+                    data: [node.id],
+                    node: node.id
+                });
+            }
+
             // If we're selecting the root node in init mode, begin editing
             if (this.jm.options.init_mode && node.isroot) {
                 this.edit_node_begin(node);
