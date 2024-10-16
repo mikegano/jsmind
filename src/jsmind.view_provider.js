@@ -150,20 +150,25 @@ export class ViewProvider {
         this._initialized = true;
     }
     expand_size() {
+        console.log('expand_size called');
         var min_size = this.layout.get_min_size();
         var min_width = min_size.w + this.opts.hmargin * 2;
         var min_height = min_size.h + this.opts.vmargin * 2;
         var client_w = this.e_panel.clientWidth;
         var client_h = this.e_panel.clientHeight;
-        if (client_w < min_width) {
-            client_w = min_width;
+        console.log('Client size:', client_w, client_h);
+        console.log('Min size:', min_width, min_height);
+        var new_width = Math.max(min_width, client_w);
+        var new_height = Math.max(min_height, client_h);
+        if (client_w < min_width || client_h < min_height) {
+            console.log('Expanding size to:', new_width, new_height);
+            this.size.w = new_width;
+            this.size.h = new_height;
+        } else {
+            console.log('No need to expand, keeping current size');
+            this.size.w = min_width;
+            this.size.h = min_height;
         }
-        if (client_h < min_height) {
-            client_h = min_height;
-        }
-        // Ensure the size does not exceed the client window's dimensions
-        this.size.w = client_w;
-        this.size.h = client_h;
     }
     init_nodes_size(node) {
         var view_data = node._data.view;

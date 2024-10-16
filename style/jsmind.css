@@ -111,7 +111,7 @@ jmexpander:hover {
     border-color: #000;
 }
 
-@media screen and (max-device-width: 1024px) {
+/* @media screen and (max-device-width: 1024px) {
     jmnode {
         padding: 5px;
         border-radius: 3px;
@@ -120,7 +120,7 @@ jmexpander:hover {
     jmnode.root {
         font-size: 21px;
     }
-}
+} */
 
 jmnodes.theme-init jmnode {
     background-color: #4F4F64;

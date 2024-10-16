@@ -19,8 +19,8 @@ const default_options = {
     view: {
         engine: 'canvas',
         enable_device_pixel_ratio: false,
-        hmargin: 10,
-        vmargin: 10,
+        hmargin: 50,
+        vmargin: 50,
         line_width: 2,
         line_color: '#555',
         line_style: 'curved', // [straight | curved]
@@ -29,7 +29,7 @@ const default_options = {
         node_overflow: 'hidden', // [hidden | wrap]
         zoom: {
             min: 0.5,
-            max: 2.1,
+            max: 2,
             step: 0.1,
         },
         custom_node_render: null,
