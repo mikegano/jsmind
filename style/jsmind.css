@@ -19,7 +19,7 @@
 } 
 
 .jsmind-inner {
-    moz-user-select: -moz-none;
+    /* moz-user-select: -moz-none; */
     -moz-user-select: none;
     -o-user-select: none;
     -khtml-user-select: none;
@@ -159,12 +159,6 @@ jmnodes.theme-init jmnode:hover {
     background-color: #4F4F64;
     color: #4F4F64;
     /* box-shadow: 1px 1px 1px #666681; */
-}
-
-jmnodes.theme-init jmnode.selected {
-    /* background-color: #C8C6E6;
-    color: #334; */
-    /* box-shadow: 2px 2px 8px #000; */
 }
 
 jmnodes.theme-init jmnode.root {
