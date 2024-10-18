@@ -30,6 +30,7 @@ export class Node {
         this.expanded = !!bExpanded;
         this.children = [];
         this._data = {};
+        this.level = this.isroot ? 0 : (this.parent.level + 1);
     }
 
     get_location() {

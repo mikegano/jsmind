@@ -80,35 +80,62 @@ jmexpander {
 /* default theme */
 jmnode {
     padding: 10px;
-    background-color: #99B;
-    color: #334;
+    /* background-color: #99B; */
+    color: #1f1a40;
     border-radius: 5px;
-    box-shadow: 1px 1px 1px #AAC;
     font: 16px/1.125 Verdana, Arial, Helvetica, sans-serif;
     min-width: 200px;
     text-align: center;
 }
-jmnode:hover {
-    box-shadow: 2px 2px 8px #000;
-    background-color: #BBD;
-    color: #334;
-}
-jmnode.selected {
-    background-color: #C8C6E6;
-    color: #334;
-    box-shadow: 2px 2px 8px #000;
-}
+
 jmnode.root {
     font-size: 20px;
     width: 350px;
-    text-align: center;
+    color: #2d1649;
+    background-color: #adaad7;
+}
+jmnode.root:hover {
+    background-color: #C8C6E6;
+}
+jmnode.root.selected {
+    color: #334;
+    background-color: #C8C6E6;
 }
 
-jmexpander {
-    border-color: gray;
+jmnode.level-1 {
+    color: #DDF;
+    background-color: #645b99;
 }
-jmexpander:hover {
-    border-color: #000;
+jmnode.level-1:hover {
+    color: #FFF;
+    background-color: #837ab6;
+}
+jmnode.level-1.selected {
+    color: #334;
+    background-color: #C8C6E6;
+}
+
+jmnode.level-2 {
+    background-color: #1f1a40;
+    color: #adaad7;
+}
+jmnode.level-2:hover {
+    color: #DDF;
+    background-color: #645b99;
+}
+jmnode.level-2.selected {
+    color: #334;
+    background-color: #C8C6E6;
+}
+
+::selection {
+    background-color: #5203b3;
+    color: #DDF;
+}
+
+::-moz-selection {
+    background-color: #5203b3;
+    color: #DDF;
 }
 
 /* @media screen and (max-device-width: 1024px) {
@@ -123,15 +150,15 @@ jmexpander:hover {
 } */
 
 jmnodes.theme-init jmnode {
-    background-color: #4F4F64;
-    color: #4F4F64;
+    background-color: #3b3b56;
+    color: #3b3b56;
     border-radius: 5px;
-    box-shadow: 1px 1px 1px #666681;
+    /* box-shadow: 1px 1px 1px #666681; */
 }
 jmnodes.theme-init jmnode:hover {
     background-color: #4F4F64;
     color: #4F4F64;
-    box-shadow: 1px 1px 1px #666681;
+    /* box-shadow: 1px 1px 1px #666681; */
 }
 
 jmnodes.theme-init jmnode.selected {
@@ -144,8 +171,13 @@ jmnodes.theme-init jmnode.root {
     font-size: 20px;
     width: 350px;
     text-align: center;
+    color: #334;
     background-color: #C8C6E6;
 }
 jmnodes.theme-init jmnode.root:hover {
+    background-color: #DDF;
+}
+jmnode.root.selected {
+    color: #334;
     background-color: #DDF;
 }

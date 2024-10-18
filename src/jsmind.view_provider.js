@@ -220,6 +220,7 @@ export class ViewProvider {
         if (node.isroot) {
             d.className = 'root';
         } else {
+            d.className = `level-${node.level}`;
             var d_e = $.c('jmexpander');
             $.t(d_e, '-');
             d_e.setAttribute('nodeid', node.id);
