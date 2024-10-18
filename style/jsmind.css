@@ -171,7 +171,6 @@ jmnodes.theme-init jmnode.root {
 jmnodes.theme-init jmnode.root:hover {
     background-color: #DDF;
 }
-jmnode.root.selected {
-    color: #334;
+jmnodes.theme-init jmnode.root.selected {
     background-color: #DDF;
 }
