@@ -116,8 +116,8 @@ jmnode.level-1.selected {
 }
 
 jmnode.level-2 {
-    background-color: #1f1a40;
     color: #adaad7;
+    background-color: #1f1a40;
 }
 jmnode.level-2:hover {
     color: #DDF;
