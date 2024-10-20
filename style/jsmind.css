@@ -112,7 +112,7 @@ jmnode.level-1:hover {
 }
 jmnode.level-1.selected {
     color: #334;
-    background-color: #C8C6E6;
+    background-color: #adaad7;
 }
 
 jmnode.level-2 {
@@ -124,8 +124,8 @@ jmnode.level-2:hover {
     background-color: #645b99;
 }
 jmnode.level-2.selected {
-    color: #334;
-    background-color: #C8C6E6;
+    color: #DDF;
+    background-color: #645b99;
 }
 
 ::selection {
