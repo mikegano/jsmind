@@ -94,38 +94,45 @@ jmnode.root {
     color: #2d1649;
     background-color: #adaad7;
 }
-jmnode.root:hover {
+jmnode.root:hover:not(.selected) {
     background-color: #C8C6E6;
+    cursor: pointer;
 }
 jmnode.root.selected {
     color: #334;
-    background-color: #C8C6E6;
+    background-color: #adaad7;
+    outline: 3px solid #FFF;
+    cursor: default;
 }
 
 jmnode.level-1 {
     color: #DDF;
-    background-color: #645b99;
+    background-color: #534a88;
 }
-jmnode.level-1:hover {
+jmnode.level-1:hover:not(.selected) {
     color: #FFF;
     background-color: #837ab6;
+    cursor: pointer;
 }
 jmnode.level-1.selected {
-    color: #334;
-    background-color: #adaad7;
+    color: #FFF;
+    outline: 3px solid #DDF;
+    cursor: default;
 }
 
 jmnode.level-2 {
     color: #adaad7;
     background-color: #1f1a40;
 }
-jmnode.level-2:hover {
+jmnode.level-2:hover:not(.selected) {
     color: #DDF;
     background-color: #645b99;
+    cursor: pointer;
 }
 jmnode.level-2.selected {
     color: #DDF;
-    background-color: #645b99;
+    outline: 3px solid #adaad7;
+    cursor: default;
 }
 
 ::selection {
@@ -164,13 +171,16 @@ jmnodes.theme-init jmnode:hover {
 jmnodes.theme-init jmnode.root {
     font-size: 20px;
     width: 350px;
-    text-align: center;
-    color: #334;
-    background-color: #C8C6E6;
+    color: #2d1649;
+    background-color: #adaad7;
 }
-jmnodes.theme-init jmnode.root:hover {
-    background-color: #DDF;
+jmnodes.theme-init jmnode.root:hover:not(.selected) {
+    background-color: #C8C6E6;
+    cursor: pointer;
 }
 jmnodes.theme-init jmnode.root.selected {
-    background-color: #DDF;
+    color: #334;
+    background-color: #adaad7;
+    outline: 3px solid #FFF;
+    cursor: default;
 }
